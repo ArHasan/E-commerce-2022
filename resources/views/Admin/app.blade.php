@@ -73,7 +73,7 @@
         </nav>
 
         <main class="py-4">
-            @yield('admin_content')
+            @yield('admin_content_def')
         </main>
     </div>
 </body>
