@@ -4,14 +4,20 @@
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
-{{--     <li class="nav-item d-none d-sm-inline-block">
-       <a class="dropdown-item" id="logout" href="{{ route('admin.logout') }}">
+    <li class="nav-item d-none d-sm-inline-block">
+       <a class="dropdown-item"  id="logout" href="{{ route('admin.logout') }}">
           {{ __('Logout') }}
       </a>
-    </li> --}}
+    </li>
     <li class="nav-item d-none d-sm-inline-block">
       <a href="#" class="nav-link text-danger"> <b> POS ORDER </b></a>
     </li>
+    {{-- <li class="nav-item dropdown">
+      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('admin.logout') }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          {{ Auth::user()->name }}
+      </a>
+
+  </li> --}}
   </ul>
 
   <!-- SEARCH FORM -->

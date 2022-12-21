@@ -13,6 +13,11 @@
   <link rel="stylesheet" href="{{ asset('backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css')}}">
+  <!-- Theme style new add-->
+  {{-- @vite(['resources/js/app.js']) --}}
+  <!-- toaster-->
+  <link rel="stylesheet" type="text/css" href="{{ asset('backend/toastr/toastr.css') }}">
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 </head>
 <body>
   <div class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -66,5 +71,111 @@
 <script src="{{ asset('backend/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('backend/dist/js/pages/dashboard2.js')}}"></script>
+<!-- toastr -->
+<script type="text/javascript" src="{{ asset('backend/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('backend/sweetalert/sweetalert.min.js') }}"></script>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('backend') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ asset('backend') }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ asset('backend') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('backend') }}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/jszip/jszip.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="{{ asset('backend') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+{{-- Data Table --}}
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+
+<script>  
+  $(document).on("click", "#delete", function(e){
+      e.preventDefault();
+      var link = $(this).attr("href");
+         swal({
+           title: "Are you Want to delete?",
+           text: "Once Delete, This will be Permanently Delete!",
+           icon: "warning",
+           buttons: true,
+           dangerMode: true,
+         })
+         .then((willDelete) => {
+           if (willDelete) {
+                window.location.href = link;
+           } else {
+             swal("Safe Data!");
+           }
+         });
+     });
+</script>
+{{-- before  logout showing alert message --}}
+<script>  
+  $(document).on("click", "#logout", function(e){
+      e.preventDefault();
+      var link = $(this).attr("href");
+         swal({
+           title: "Are you Want to logout?",
+           text: "",
+           icon: "warning",
+           buttons: true,
+           dangerMode: true,
+         })
+         .then((willDelete) => {
+           if (willDelete) {
+                window.location.href = link;
+           } else {
+             swal("Not Logout!");
+           }
+         });
+     });
+</script>
+
+
+<script>
+ @if(Session::has('massage'))
+   var type="{{Session::get('alert-type','info')}}"
+   switch(type){
+       case 'info':
+            toastr.info("{{ Session::get('massage') }}");
+            break;
+       case 'success':
+           toastr.success("{{ Session::get('massage') }}");
+           break;
+       case 'warning':
+          toastr.warning("{{ Session::get('massage') }}");
+           break;
+       case 'error':
+           toastr.error("{{ Session::get('massage') }}");
+           break;
+         }
+ @endif
+</script>
+
 </body>
 </html>

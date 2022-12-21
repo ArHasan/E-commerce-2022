@@ -24,15 +24,18 @@ class RedirectIfAuthenticated
         // return redirect(RouteServiceProvider::HOME);
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check() && Auth::user()->is_admin == 1) {
+            // dd($guard);
+            if (Auth::guard($guard)->check() && Auth::user()->is_admin==1) {
+                dd('admin');
                 // return "--admin";
-                return redirect()->route('admin');
-            }elseif(Auth::guard($guard)->check() && Auth::user()->is_admin == 0){
-                return redirect(RouteServiceProvider::HOME);
-                    // return redirect()->route('home');
+                return redirect()->route('admin.home');
+            }elseif(Auth::guard($guard)->check() && Auth::user()->is_admin==0){
+                // dd('user');
+                // return redirect(RouteServiceProvider::HOME);
+                    return redirect()->route('home');
                     // return "--User";
             }else{
-                // dd('sf');
+                // dd('else');
                 // return "--empty";
                 // dd($next($request));
                 return $next($request);
